@@ -17,4 +17,8 @@ Imports:
     yaml,
     validate,
     testthat,
-    xportr
+    xportr,
+    metacore,
+    metatools
+Suggests:
+    pkglite

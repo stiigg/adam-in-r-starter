@@ -1,0 +1,36 @@
+dataset: ADOCC
+keys: [USUBJID, OCCSEQ]
+variables:
+  - name: STUDYID
+    type: character
+    source: OCC.STUDYID
+  - name: USUBJID
+    type: character
+    source: OCC.USUBJID
+  - name: OCCSEQ
+    type: integer
+    source: OCC.OCCSEQ
+  - name: OCCCAT
+    type: character
+    source: OCC.OCCCAT
+  - name: OCCUR
+    type: character
+    source: OCC.OCCUR
+  - name: OCDTC
+    type: character
+    source: OCC.OCDTC
+  - name: OCDT
+    type: date
+    derivation: impute_partial_date(OCDTC)
+  - name: OCDTM
+    type: datetime
+    derivation: derive_datetime(OCDTC, OCTM)
+  - name: OCDY
+    type: integer
+    derivation: derive_relative_day(OCDT, TRTSDT)
+  - name: OCCFL
+    type: character
+    derivation: set_analysis_flag(OCCUR == "Y")
+  - name: TRT01A
+    type: character
+    source: ADSL.TRT01A

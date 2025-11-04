@@ -1,0 +1,64 @@
+dataset: ADQS
+label: Questionnaire Analysis Dataset
+keys: [USUBJID, PARAMCD, AVISITN]
+variables:
+  - name: STUDYID
+    type: character
+    source: QS.STUDYID
+  - name: USUBJID
+    type: character
+    source: QS.USUBJID
+  - name: QSSEQ
+    type: integer
+    source: QS.QSSEQ
+  - name: PARAMCD
+    type: character
+    derivation: QSTESTCD
+  - name: PARAM
+    type: character
+    derivation: QSTEST
+  - name: AVISIT
+    type: character
+    derivation: coalesce(QSCAT, VISIT, paste0("Day ", derive_relative_day(QSDT, TRTSDT)))
+  - name: AVISITN
+    type: integer
+    derivation: derive_visit_window(QSDT, TRTSDT)
+  - name: ADY
+    type: integer
+    derivation: derive_relative_day(QSDT, TRTSDT)
+  - name: QSDT
+    type: date
+    derivation: impute_partial_date(QSDTC)
+  - name: QSDTM
+    type: datetime
+    derivation: derive_datetime(QSDTC, QSTM)
+  - name: AVAL
+    type: numeric
+    source: QS.QSSTRESN
+  - name: BASE
+    type: numeric
+    derivation: last value prior to or on Day 1 per PARAMCD
+  - name: CHG
+    type: numeric
+    derivation: AVAL - BASE
+  - name: PCHG
+    type: numeric
+    derivation: (AVAL - BASE) / abs(BASE) * 100
+  - name: ABLFL
+    type: character
+    derivation: ADY <= 1
+  - name: ANL01FL
+    type: character
+    derivation: set_analysis_flag(!is.na(AVAL))
+  - name: ANL02FL
+    type: character
+    derivation: set_analysis_flag(ANL01FL == "Y" & ADY >= 1)
+  - name: TRTSDT
+    type: date
+    source: ADSL.TRTSDT
+  - name: TRTEDT
+    type: date
+    source: ADSL.TRTEDT
+  - name: TRT01A
+    type: character
+    source: ADSL.TRT01A
