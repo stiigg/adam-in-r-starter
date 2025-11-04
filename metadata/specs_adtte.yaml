@@ -1,0 +1,45 @@
+dataset: ADTTE
+keys: [USUBJID]
+variables:
+  - name: STUDYID
+    type: character
+    source: ADSL.STUDYID
+  - name: USUBJID
+    type: character
+    source: ADSL.USUBJID
+  - name: TRT01A
+    type: character
+    source: ADSL.TRT01A
+  - name: TRTSDT
+    type: date
+    source: ADSL.TRTSDT
+  - name: TRTEDT
+    type: date
+    source: ADSL.TRTEDT
+  - name: EVENTDT
+    type: date
+    derivation: min(ASTDT)
+  - name: EVNTDTM
+    type: datetime
+    derivation: derive_datetime(EVENTDT)
+  - name: CNSR
+    type: integer
+    derivation: derive_censor_flag
+  - name: AVAL
+    type: numeric
+    derivation: derive_duration(TRTSDT, EVENTDT)
+  - name: AVALU
+    type: character
+    derivation: constant("DAYS")
+  - name: PARAMCD
+    type: character
+    derivation: constant("TTAE")
+  - name: PARAM
+    type: character
+    derivation: constant("Time to first treatment-emergent AE")
+  - name: SRC
+    type: character
+    derivation: source_origin
+  - name: ANL01FL
+    type: character
+    derivation: set_analysis_flag(!is.na(AVAL))

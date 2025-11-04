@@ -1,3 +1,14 @@
 TRT01A:
   - {code: "Placebo", label: "Placebo"}
   - {code: "DrugA",   label: "Drug A"}
+AETOXGR:
+  - {code: "1", label: "Mild"}
+  - {code: "2", label: "Moderate"}
+  - {code: "3", label: "Severe"}
+ANRIND:
+  - {code: "LOW", label: "Below Reference"}
+  - {code: "NORMAL", label: "Within Reference"}
+  - {code: "HIGH", label: "Above Reference"}
+OCCUR:
+  - {code: "Y", label: "Occurred"}
+  - {code: "N", label: "Did Not Occur"}

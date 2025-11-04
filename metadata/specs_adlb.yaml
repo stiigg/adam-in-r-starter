@@ -1,0 +1,63 @@
+dataset: ADLB
+keys: [USUBJID, LBSEQ]
+variables:
+  - name: STUDYID
+    type: character
+    source: LB.STUDYID
+  - name: USUBJID
+    type: character
+    source: LB.USUBJID
+  - name: LBSEQ
+    type: integer
+    source: LB.LBSEQ
+  - name: LBTEST
+    type: character
+    source: LB.LBTEST
+  - name: LBTESTCD
+    type: character
+    source: LB.LBTESTCD
+  - name: LBDTC
+    type: character
+    source: LB.LBDTC
+  - name: LBDT
+    type: date
+    derivation: impute_partial_date(LBDTC)
+  - name: LBDTM
+    type: datetime
+    derivation: derive_datetime(LBDTC, LBTM)
+  - name: LBDY
+    type: integer
+    derivation: derive_relative_day(LBDT, TRTSDT)
+  - name: LBSTRESN
+    type: numeric
+    source: LB.LBSTRESN
+  - name: ANRIND
+    type: character
+    source: LB.ANRIND
+  - name: BASE
+    type: numeric
+    derivation: baseline_value(LBSTRESN, LBDY)
+  - name: AVAL
+    type: numeric
+    derivation: copy(LBSTRESN)
+  - name: CHG
+    type: numeric
+    derivation: AVAL - BASE
+  - name: PCHG
+    type: numeric
+    derivation: percent_change(AVAL, BASE)
+  - name: PARAMCD
+    type: character
+    derivation: copy(LBTESTCD)
+  - name: PARAM
+    type: character
+    derivation: copy(LBTEST)
+  - name: AVISIT
+    type: character
+    derivation: visit_label
+  - name: ANL01FL
+    type: character
+    derivation: set_analysis_flag(!is.na(AVAL))
+  - name: TRT01A
+    type: character
+    source: ADSL.TRT01A

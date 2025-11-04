@@ -13,6 +13,27 @@ variables:
   - name: TRTSDT
     type: date
     derivation: first_exposure_date
+  - name: TRTEDT
+    type: date
+    derivation: last_exposure_date
+  - name: TRTSDTM
+    type: datetime
+    derivation: derive_datetime(TRTSDT)
   - name: TRT01A
     type: character
     derivation: first_treatment_label
+  - name: TRTAN
+    type: integer
+    derivation: row_number()
+  - name: SAFFL
+    type: character
+    derivation: derive_population_flag(!is.na(TRTSDT))
+  - name: ITTFL
+    type: character
+    derivation: derive_population_flag(!is.na(TRTSDT))
+  - name: PPFL
+    type: character
+    derivation: derive_population_flag(!is.na(TRTEDT))
+  - name: EOSDT
+    type: date
+    derivation: coalesce(TRTEDT, TRTSDT)

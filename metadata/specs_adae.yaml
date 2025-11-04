@@ -1,0 +1,60 @@
+dataset: ADAE
+keys: [USUBJID, AESEQ]
+variables:
+  - name: STUDYID
+    type: character
+    source: AE.STUDYID
+  - name: USUBJID
+    type: character
+    source: AE.USUBJID
+  - name: AESEQ
+    type: integer
+    source: AE.AESEQ
+  - name: AETERM
+    type: character
+    source: AE.AETERM
+  - name: AETOXGR
+    type: character
+    source: AE.AETOXGR
+  - name: AESTDTC
+    type: character
+    source: AE.AESTDTC
+  - name: AEENDTC
+    type: character
+    source: AE.AEENDTC
+  - name: ASTDT
+    type: date
+    derivation: impute_partial_date(AESTDTC)
+  - name: AENDT
+    type: date
+    derivation: impute_partial_date(AEENDTC)
+  - name: ASTDTM
+    type: datetime
+    derivation: derive_datetime(AESTDTC, AESTTM)
+  - name: AENDTM
+    type: datetime
+    derivation: derive_datetime(AEENDTC, AEENTM)
+  - name: ASTDY
+    type: integer
+    derivation: derive_relative_day(ASTDT, TRTSDT)
+  - name: AENDY
+    type: integer
+    derivation: derive_relative_day(AENDT, TRTSDT)
+  - name: ADURN
+    type: integer
+    derivation: derive_duration(ASTDT, AENDT)
+  - name: TRTSDT
+    type: date
+    source: ADSL.TRTSDT
+  - name: TRTEDT
+    type: date
+    source: ADSL.TRTEDT
+  - name: TEAEFL
+    type: character
+    derivation: set_analysis_flag(ASTDT >= TRTSDT)
+  - name: AOCCFL
+    type: character
+    derivation: set_analysis_flag(ADURN >= 1)
+  - name: TRT01A
+    type: character
+    source: ADSL.TRT01A
