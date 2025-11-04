@@ -1,0 +1,18 @@
+dataset: ADSL
+keys: [USUBJID]
+variables:
+  - name: STUDYID
+    type: character
+    source: DM.STUDYID
+  - name: USUBJID
+    type: character
+    source: DM.USUBJID
+  - name: AGE
+    type: integer
+    source: DM.AGE
+  - name: TRTSDT
+    type: date
+    derivation: first_exposure_date
+  - name: TRT01A
+    type: character
+    derivation: first_treatment_label

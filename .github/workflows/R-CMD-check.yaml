@@ -1,0 +1,29 @@
+name: R-CMD-check
+on: [push, pull_request]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: |
+            any::targets
+            any::tarchetypes
+            any::dplyr
+            any::tidyr
+            any::lubridate
+            any::readr
+            any::stringr
+            any::tibble
+            any::yaml
+            any::validate
+            any::testthat
+            any::xportr
+      - name: Run tests
+        run: |
+          Rscript -e 'source("R/derivations_adsl.R"); source("R/utils.R"); source("R/qc.R"); source("R/exports.R"); testthat::test_dir("tests/testthat")'
+      - name: Dry-run pipeline
+        run: |
+          Rscript -e 'targets::tar_make(reporter = "minimal")'

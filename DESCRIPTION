@@ -1,0 +1,20 @@
+Package: adam.in.r
+Type: Project
+Title: ADaM in R (R-only Scaffold)
+Version: 0.0.1
+Encoding: UTF-8
+Depends: R (>= 4.2)
+Imports:
+    dplyr,
+    tidyr,
+    lubridate,
+    readr,
+    purrr,
+    stringr,
+    tibble,
+    targets,
+    tarchetypes,
+    yaml,
+    validate,
+    testthat,
+    xportr
