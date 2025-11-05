@@ -1,0 +1,7 @@
+R/build_*.R                 @data-eng @stats-lead
+_targets.R                  @data-eng @stats-lead
+R/write_xpt.R               @data-eng @qa-lead
+scripts/pkg_risk_assess.R   @qa-lead
+.github/workflows/ci.yml    @devops
+reporting/qc_dashboard.Rmd  @qa-lead
+docs/ADRG.md                @qa-lead @reg-affairs
