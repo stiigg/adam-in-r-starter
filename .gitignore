@@ -1,8 +1,6 @@
-.Rproj.user
+deliverables/
 .Rhistory
-.RData
+.Rproj.user/
 .Ruserdata
-renv/
-.DS_Store
-*_cache/
-*_targets/
+*.html
+.Rcheck/

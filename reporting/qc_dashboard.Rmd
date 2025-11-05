@@ -1,0 +1,25 @@
+---
+title: "ADaM QC Dashboard"
+output: html_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE)
+library(readr); library(dplyr); library(DT); library(haven); library(tools); library(purrr); library(tibble)
+
+Build Metadata
+Time: r format(Sys.time(), '%Y-%m-%d %H:%M:%S')
+Git SHA: r tryCatch(system('git rev-parse --short HEAD', intern=TRUE), error=function(e) 'NA')
+Package Risk (riskmetric)
+risk <- read_csv("deliverables/validation/riskmetric_scores.csv", show_col_types = FALSE)
+DT::datatable(risk)
+
+Traceability
+tr <- read_csv("deliverables/traceability/traceability_summary.csv", show_col_types = FALSE)
+DT::datatable(tr)
+
+Dataset Row Counts (XPT)
+paths <- list.files("deliverables/xpt", pattern="\\.xpt$", full.names=TRUE)
+counts <- tibble(dataset = file_path_sans_ext(basename(paths)),
+                 rows = map_int(paths, ~ haven::read_xpt(.x) |> nrow()))
+DT::datatable(counts)
+```
