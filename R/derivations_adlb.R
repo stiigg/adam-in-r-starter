@@ -30,11 +30,12 @@ make_adlb <- function(lb, adsl, specs, param_meta = NULL) {
 
   required_lb <- spec_required_columns(specs, "lb")
   if (length(required_lb)) lb <- ensure_cols(lb, required_lb)
-  adsl <- ensure_cols(adsl, c("USUBJID", "TRTSDT", "TRT01A"))
+  # Ensure ADSL has population flags
+  adsl <- ensure_cols(adsl, c("USUBJID", "TRTSDT", "TRT01A", "ITTFL", "SAFFL", "PPFL"))
 
   adlb <- lb |>
     dplyr::left_join(adsl |>
-      dplyr::select("USUBJID", "TRTSDT", "TRT01A"), by = "USUBJID") |>
+      dplyr::select("USUBJID", "TRTSDT", "TRT01A", "ITTFL", "SAFFL", "PPFL"), by = "USUBJID") |>
     dplyr::mutate(
       LBDT = impute_partial_date(.data$LBDTC),
       LBDY = derive_relative_day(.data$LBDT, .data$TRTSDT)
@@ -65,7 +66,10 @@ make_adlb <- function(lb, adsl, specs, param_meta = NULL) {
       LBSEQ = .data$LBSEQ,
       LBCAT = .data$LBCAT,
       LBDTC = .data$LBDTC,
-      ITTFL = "Y", SAFFL = "Y", PPFL = NA_character_
+      # Dynamically copy from ADSL
+      ITTFL = .data$ITTFL,
+      SAFFL = .data$SAFFL,
+      PPFL = .data$PPFL
     )
 
   # Step 9: Datetime derivation must follow all prior calcs
@@ -79,8 +83,6 @@ make_adlb <- function(lb, adsl, specs, param_meta = NULL) {
   adlb <- apply_metadata_mapping(adlb, specs)
   validate_metadata_variables(adlb, specs)
 
-  # Optional: Grading/CTCAE extensions can be modulated here
-  # Document cross-step requirements and references to ADaMIG v1.1 or later
   adlb
 }
 
