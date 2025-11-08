@@ -12,3 +12,54 @@ ANRIND:
 OCCUR:
   - {code: "Y", label: "Occurred"}
   - {code: "N", label: "Did Not Occur"}
+AESEV:
+  - {code: "MILD", label: "Mild"}
+  - {code: "MODERATE", label: "Moderate"}
+  - {code: "SEVERE", label: "Severe"}
+AESER:
+  - {code: "Y", label: "Serious"}
+  - {code: "N", label: "Not Serious"}
+AEOUT:
+  - {code: "RECOVERED", label: "Recovered/Resolved"}
+  - {code: "NOT_RECOVERED", label: "Not Recovered/Not Resolved"}
+  - {code: "FATAL", label: "Fatal"}
+  - {code: "UNKNOWN", label: "Unknown"}
+AEREL:
+  - {code: "NOT RELATED", label: "Not Related"}
+  - {code: "POSSIBLE", label: "Possible"}
+  - {code: "PROBABLE", label: "Probable"}
+  - {code: "DEFINITE", label: "Definite"}
+AESDTH:
+  - {code: "Y", label: "Death"}
+  - {code: "N", label: "Not Death"}
+AESLIFE:
+  - {code: "Y", label: "Life-Threatening"}
+  - {code: "N", label: "Not Life-Threatening"}
+AESHOSP:
+  - {code: "Y", label: "Required Hospitalization"}
+  - {code: "N", label: "No Hospitalization"}
+AESDISAB:
+  - {code: "Y", label: "Disabling/Incapacitating"}
+  - {code: "N", label: "Not Disabling"}
+AESCONG:
+  - {code: "Y", label: "Congenital Anomaly"}
+  - {code: "N", label: "No Congenital Anomaly"}
+AESMIE:
+  - {code: "Y", label: "Medically Important"}
+  - {code: "N", label: "Not Medically Important"}
+AEPONS:
+  - {code: "Y", label: "Sponsor Reportable"}
+  - {code: "N", label: "Not Sponsor Reportable"}
+AEACN:
+  - {code: "NONE", label: "None"}
+  - {code: "DOSE REDUCED", label: "Dose Reduced"}
+  - {code: "DRUG WITHDRAWN", label: "Drug Withdrawn"}
+  - {code: "DOSE INCREASED", label: "Dose Increased"}
+AEACNOTH:
+  - {code: "NONE", label: "No Other Therapy"}
+  - {code: "MEDICATION GIVEN", label: "Medication Given"}
+  - {code: "SURGERY", label: "Surgery"}
+  - {code: "OTHER", label: "Other"}
+TRTA:
+  - {code: "Placebo", label: "Placebo"}
+  - {code: "DrugA", label: "Drug A"}
